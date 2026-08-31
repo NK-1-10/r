@@ -1,5 +1,5 @@
 extends Node
 
-signal change_text(which)
+signal change_text(which, first)
 signal Intro_finnished()
 signal text_toggle(where)

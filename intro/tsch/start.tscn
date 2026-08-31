@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cjjos867l5khp"]
 
 [ext_resource type="Script" uid="uid://c01srskcbavbg" path="res://intro/script/start.gd" id="1_63r3i"]
-[ext_resource type="PackedScene" uid="uid://dyxoxntpeujqn" path="res://all/tsch/walls.tscn" id="1_akpa3"]
 [ext_resource type="Script" uid="uid://b52ftq1bxspjq" path="res://intro/script/box.gd" id="4_hpohc"]
 [ext_resource type="PackedScene" uid="uid://63sesauj51hi" path="res://all/tsch/text.tscn" id="4_yl8qv"]
 [ext_resource type="Texture2D" uid="uid://dejvm8iok4ey" path="res://asstes/one/Untitled20_20260615181054.PNG" id="5_hpohc"]
@@ -25,6 +24,16 @@
 [ext_resource type="Texture2D" uid="uid://dqpt026a4agy4" path="res://asstes/two/Untitled20_20260615221337.PNG" id="23_xnfk5"]
 [ext_resource type="Texture2D" uid="uid://bx1v0360vmgx5" path="res://asstes/one/Untitled20_20260615182354.PNG" id="24_hgp0n"]
 [ext_resource type="Texture2D" uid="uid://d14e7oy5wisep" path="res://asstes/two/Untitled20_20260615221222.PNG" id="25_gcelp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpohc"]
+size = Vector2(2560, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqpe0"]
+size = Vector2(20, 180)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_68hrm"]
+radius = 1502.0
+height = 4620.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qh6qy"]
 animations = [{
@@ -124,8 +133,29 @@ offset_right = 2560.0
 offset_bottom = 1343.0
 color = Color(0.13725491, 0.14509805, 0.14117648, 1)
 
-[node name="walls" parent="." unique_id=1207429995 instance=ExtResource("1_akpa3")]
-position = Vector2(-11, 0)
+[node name="ground" type="StaticBody2D" parent="." unique_id=1585173077]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=861328245]
+position = Vector2(1280, 1332)
+shape = SubResource("RectangleShape2D_hpohc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ground" unique_id=1384416821]
+position = Vector2(0, 1263)
+shape = SubResource("RectangleShape2D_cqpe0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ground" unique_id=1750853090]
+position = Vector2(2560, 1263)
+shape = SubResource("RectangleShape2D_cqpe0")
+
+[node name="out" type="Area2D" parent="." unique_id=858111458]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="out" unique_id=381702761]
+position = Vector2(1259, 402)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_68hrm")
+
+[node name="respawn" type="Marker2D" parent="." unique_id=745318885]
+position = Vector2(491, -731)
 
 [node name="Text" parent="." unique_id=520201991 instance=ExtResource("4_yl8qv")]
 
@@ -223,3 +253,6 @@ position = Vector2(18.000002, 79.99999)
 rotation = 0.05740482
 scale = Vector2(0.7, 0.7)
 polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -420.7, 319.90002, -423, 316.3, -423, 314)
+
+[connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]
+[connection signal="body_shape_entered" from="out" to="." method="_on_out_body_shape_entered"]

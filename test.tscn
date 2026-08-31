@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c2v7rlbwnuhis"]
+
+[ext_resource type="Script" uid="uid://bce20vrsf8cvp" path="res://test.gd" id="1_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://dyxoxntpeujqn" path="res://all/tsch/walls.tscn" id="2_ppyta"]
+[ext_resource type="Texture2D" uid="uid://bjynp3i8eikgf" path="res://icon.svg" id="3_ykrsh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk20i"]
+size = Vector2(132, 130)
+
+[node name="test" type="Node2D" unique_id=2008827986]
+script = ExtResource("1_6uqi0")
+
+[node name="walls" parent="." unique_id=1207429995 instance=ExtResource("2_ppyta")]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=741080533]
+position = Vector2(1201, 385)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=920012699]
+texture = ExtResource("3_ykrsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=182096599]
+position = Vector2(-2, -1)
+shape = SubResource("RectangleShape2D_jk20i")
+
+[connection signal="mouse_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_mouse_entered"]
+[connection signal="mouse_exited" from="RigidBody2D" to="." method="_on_rigid_body_2d_mouse_exited"]

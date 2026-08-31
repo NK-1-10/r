@@ -23,6 +23,10 @@ Signals="*uid://b5stwrnbvhx3n"
 
 window/size/mode=2
 
+[global_group]
+
+throwables="bodies that can be thrown out"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
