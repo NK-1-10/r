@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://cqd2uvcto6sfm"]
+
+[ext_resource type="Texture2D" uid="uid://dejvm8iok4ey" path="res://asstes/one/Untitled20_20260615181054.PNG" id="1_fthky"]
+[ext_resource type="Script" uid="uid://b52ftq1bxspjq" path="res://intro/script/box.gd" id="1_fvfan"]
+[ext_resource type="Texture2D" uid="uid://bmllonts3i7ou" path="res://asstes/one/Untitled20_20260615182006.PNG" id="2_03v4j"]
+[ext_resource type="Texture2D" uid="uid://crmklxcboep12" path="res://asstes/one/Untitled20_20260615182014.PNG" id="3_3ugts"]
+[ext_resource type="Texture2D" uid="uid://mr6mit4axxe" path="res://asstes/one/Untitled20_20260615182021.PNG" id="4_kta1v"]
+[ext_resource type="Texture2D" uid="uid://dywktvkpwg7kn" path="res://asstes/one/Untitled20_20260615182027.PNG" id="5_fh3sg"]
+[ext_resource type="Texture2D" uid="uid://b4360rm4pca1p" path="res://asstes/one/Untitled20_20260615182034.PNG" id="6_cxf7o"]
+[ext_resource type="Texture2D" uid="uid://cnax7wyrv5h1y" path="res://asstes/two/Untitled20_20260615182412.PNG" id="7_mdu4s"]
+[ext_resource type="Texture2D" uid="uid://oqwbrs663f27" path="res://asstes/two/Untitled20_20260615220954.PNG" id="8_0hm2v"]
+[ext_resource type="Texture2D" uid="uid://cfaf0as6dp0pg" path="res://asstes/two/Untitled20_20260615221027.PNG" id="9_qvah4"]
+[ext_resource type="Texture2D" uid="uid://c8ygc0jf7r5w5" path="res://asstes/two/Untitled20_20260615221037.PNG" id="10_fvfan"]
+[ext_resource type="Texture2D" uid="uid://ojo3q3hcma5i" path="res://asstes/two/Untitled20_20260615221042.PNG" id="11_vjrkd"]
+[ext_resource type="Texture2D" uid="uid://bo8rij836b7cr" path="res://asstes/two/Untitled20_20260615221126.PNG" id="12_4daor"]
+[ext_resource type="Texture2D" uid="uid://bv3ehgagm3wtt" path="res://asstes/two/Untitled20_20260615221144.PNG" id="13_cyref"]
+[ext_resource type="Texture2D" uid="uid://c3oi05y7uwdhm" path="res://asstes/two/Untitled20_20260615221150.PNG" id="14_ymax0"]
+[ext_resource type="Texture2D" uid="uid://cmjjqoevv0tm7" path="res://asstes/two/Untitled20_20260615221155.PNG" id="15_o2bom"]
+[ext_resource type="Texture2D" uid="uid://bttjwwfpsj0cb" path="res://asstes/two/Untitled20_20260615221201.PNG" id="16_ifeci"]
+[ext_resource type="Texture2D" uid="uid://cigfxry3ody56" path="res://asstes/two/Untitled20_20260615221207.PNG" id="17_dva5e"]
+[ext_resource type="Texture2D" uid="uid://efivvopxx8g4" path="res://asstes/two/Untitled20_20260615221212.PNG" id="18_lqj8l"]
+[ext_resource type="Texture2D" uid="uid://dqpt026a4agy4" path="res://asstes/two/Untitled20_20260615221337.PNG" id="19_on7c5"]
+[ext_resource type="Texture2D" uid="uid://bx1v0360vmgx5" path="res://asstes/one/Untitled20_20260615182354.PNG" id="20_0hm2v"]
+[ext_resource type="Texture2D" uid="uid://d14e7oy5wisep" path="res://asstes/two/Untitled20_20260615221222.PNG" id="21_qvah4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fthky"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("1_fthky")
+}, {
+"duration": 0.5,
+"texture": ExtResource("2_03v4j")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_3ugts")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_kta1v")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_fh3sg")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_cxf7o")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_mdu4s")
+}],
+"loop": false,
+"name": &"bow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.7,
+"texture": ExtResource("7_mdu4s")
+}, {
+"duration": 0.7,
+"texture": ExtResource("8_0hm2v")
+}, {
+"duration": 0.7,
+"texture": ExtResource("9_qvah4")
+}, {
+"duration": 0.7,
+"texture": ExtResource("10_fvfan")
+}, {
+"duration": 0.7,
+"texture": ExtResource("11_vjrkd")
+}, {
+"duration": 0.7,
+"texture": ExtResource("12_4daor")
+}, {
+"duration": 0.7,
+"texture": ExtResource("13_cyref")
+}, {
+"duration": 0.7,
+"texture": ExtResource("14_ymax0")
+}, {
+"duration": 0.7,
+"texture": ExtResource("15_o2bom")
+}, {
+"duration": 0.7,
+"texture": ExtResource("16_ifeci")
+}, {
+"duration": 0.7,
+"texture": ExtResource("17_dva5e")
+}, {
+"duration": 0.7,
+"texture": ExtResource("18_lqj8l")
+}, {
+"duration": 0.7,
+"texture": ExtResource("19_on7c5")
+}],
+"loop": false,
+"name": &"box",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvah4"]
+size = Vector2(1476, 1000)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_fvfan"]
+a = Vector2(-200, -242)
+b = Vector2(-288, -170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjrkd"]
+size = Vector2(1517.5, 108)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4daor"]
+a = Vector2(312, 276)
+b = Vector2(520, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyref"]
+size = Vector2(20, 437)
+
+[node name="box" type="Node2D" unique_id=920686563]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_fvfan")
+
+[node name="box" type="RigidBody2D" parent="." unique_id=1641545880]
+
+[node name="box" type="AnimatedSprite2D" parent="box" unique_id=245939488]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_fthky")
+animation = &"bow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="box" unique_id=2072151460]
+position = Vector2(-35, 12)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_qvah4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="box" unique_id=2061087558]
+position = Vector2(-116, -68)
+shape = SubResource("SegmentShape2D_fvfan")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="box" unique_id=168416214]
+position = Vector2(60.625, -284)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_vjrkd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="box" unique_id=391163936]
+position = Vector2(178, 124)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("SegmentShape2D_4daor")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="box" unique_id=1392921237]
+position = Vector2(430, -36.5)
+shape = SubResource("RectangleShape2D_cyref")
+
+[node name="bow" type="RigidBody2D" parent="." unique_id=113577497]
+visible = false
+position = Vector2(-66, -226)
+
+[node name="bow" type="Sprite2D" parent="bow" unique_id=895040482]
+position = Vector2(90, 424)
+rotation = -0.61072433
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("20_0hm2v")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bow" unique_id=601681085]
+position = Vector2(90, 424)
+rotation = -0.6107243
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(135, -13.5, 135, -11.799988, 123.70001, -10, 121.29999, -10, 115.29999, -5, 112.79999, -5, 102.79999, 14, 101.400024, 14, 93.29999, 54, 91.79999, 54, 94, 80.20001, 94, 84.70001, 86.5, 81, 71.70001, 81, 49.700012, 88, 48.400024, 88, 33.400024, 98, 31.200012, 98, 15, 113.099976, 15, 113.70001, -5.4000244, 123, -8.200012, 123, -20.099976, 144, -21.599976, 144, -27, 170.79999, -27, 176.40002, -21, 189.29999, -21, 192.70001, -15, 199.70001, -15, 202.79999, -3, 214.79999, -3, 216.20001, 5, 220.20001, 5, 221.40002, 17.700012, 225.90002, -4.0999756, 227, -14.200012, 227, -15.200012, 229, -20.799988, 229, -28.799988, 237, -30.299988, 237, -41.299988, 260, -42.599976, 260, -44.700012, 270, -46.400024, 270, -44, 284.3, -44, 300.5, -36, 315.5, -36, 317.7, -16, 340.7, -16, 343, -2, 353.90002, -2, 355.3, 23, 367.2, 23, 368.59998, 43.799988, 373, 58.200012, 373, 72.400024, 370, 78.5, 370, 87.5, 365, 93.599976, 365, 124.70001, 344, 126.79999, 344, 136.79999, 334, 138.09998, 334, 155.09998, 307.5, 154, 316.90002, 154, 321.5, 142, 355.7, 142, 358.3, 139, 362, 137.59998, 362, 135, 368.59998, 135, 372.40002, 129, 381, 127.70001, 381, 117, 404.59998, 117, 406.19995, 107.099976, 418, 105.5, 418, 94.5, 457, 92.79999, 457, 95, 476.19995, 95, 480.40002, 104, 499.40002, 104, 502.09998, 115, 509.09998, 115, 512.19995, 127.5, 506, 135, 515.6, 135, 517.9, 149, 530.9, 149, 533, 164, 533, 167, 529, 169.90002, 529, 161.40002, 507, 160.70001, 507, 157.70001, 489, 159, 470.09998, 159, 461.30005, 165, 443.30005, 165, 437.40002, 177, 407.40002, 177, 404.40002, 195.09998, 373, 196.40002, 373, 205.70001, 349.40002, 211, 362.40002, 211, 365.7, 241, 401.69995, 241, 403.80005, 272, 435.69995, 272, 437, 293, 452.90002, 293, 454.30005, 320, 465.40002, 320, 466.59998, 354, 473.59998, 354, 475, 410.69995, 475, 448, 479.69995, 448, 481.80005, 456.30005, 479, 462.09998, 479, 464.09998, 476, 466.90002, 476, 461, 460.5, 461, 458.69995, 425, 441.19995, 431.59998, 437, 433.90002, 437, 440.90002, 429, 442.19995, 429, 443.30005, 426.90002, 436, 415.30005, 436, 412.80005, 399.80005, 416, 377.09998, 416, 350.3, 409, 344.5, 409, 325.5, 398, 323.7, 398, 290.8, 369, 290.09998, 369, 248.40002, 307, 290.8, 315, 294.40002, 315, 300.40002, 319, 310.40002, 319, 334.3, 309, 336.90002, 309, 350.90002, 293, 352.2, 293, 358.3, 282, 359.5, 282, 363.5, 269, 365, 269, 365, 259, 366, 259, 366, 239.20001, 363, 236.20001, 363, 233.09998, 346, 217, 346, 215.59998, 322, 207.5, 322, 206.29999, 305.2, 203.5, 317.7, 194, 319.90002, 194, 329.90002, 183, 331.2, 183, 341.2, 163, 342.7, 163, 346, 140.09998, 346, 133.70001, 341, 119.5, 341, 117, 320, 101, 320, 99.5, 275.7, 87.099976, 284, 62.299988, 284, 57.700012, 282, 51.700012, 282, 48.200012, 267, 32.099976, 267, 30.5, 248, 24.5, 248, 22.5, 231.59998, 26, 225.29999, 26, 198.70001, 48.700012, 197, 23.900024, 197, 22.599976, 192, 11.599976, 192, 9, 177, -3, 177, -4.5999756)
+
+[node name="string" type="RigidBody2D" parent="." unique_id=1397246638]
+visible = false
+
+[node name="string" type="Sprite2D" parent="string" unique_id=1019350483]
+position = Vector2(18.000002, 79.99999)
+rotation = 0.05740482
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("21_qvah4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="string" unique_id=1826114341]
+position = Vector2(18.000002, 79.99999)
+rotation = 0.05740482
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(264, 204.09998, 234, 202.90002, 234, 204.20001, 195.79999, 209, 184.70001, 209, 169, 214.59998, 169, 215.20001, 126.79999, 220, 118.70001, 220, 96.900024, 226, 92.5, 226, 83.5, 231, 80.29999, 231, 59.200012, 248, 57.900024, 248, 46.900024, 266, 45.799988, 266, 34.799988, 288, 33.5, 288, 25, 315.7, 25, 324.59998, 33, 336.59998, 33, 338.90002, 42, 346.8, 42, 348.2, 70, 363.2, 70, 364.40002, 179.70001, 401, 183.5, 401, 222.5, 421, 223.5, 421, 226.29999, 431.5, 224, 438.69995, 224, 440.09998, 213, 452.19995, 213, 453, 180.29999, 480, 179, 480, 170, 493, 168.29999, 493, 166, 506.80005, 166, 518.5, 170, 525.4, 170, 528.19995, 180, 533.19995, 180, 534.80005, 208.90002, 538, 214.70001, 538, 226.59998, 543, 235.29999, 543, 242.29999, 549, 244, 549, 251, 558, 251.59998, 558, 254.59998, 567, 255, 572.30005, 248, 581.30005, 205.59998, 601, 198.40002, 601, 181.29999, 595, 178.5, 595, 131.5, 571, 128.59998, 571, 102.599976, 554, 100.79999, 554, 78.70001, 531, 101.5, 531, 110.5, 526, 113.099976, 526, 121.099976, 514, 123.599976, 514, 119, 496, 119, 491.5, 104, 463.40002, 104, 461.19995, 89, 445.09998, 89, 442.90002, 74, 432.90002, 74, 431.40002, 61, 428.40002, 61, 427.30005, 10, 418.30005, 10, 416.90002, -87.099976, 421, -99.29999, 421, -120.29999, 428, -123.5, 428, -137.5, 436, -139.9, 436, -150.9, 448, -152.6, 448, -158.6, 475, -160, 475, -160, 497.30005, -152, 527, -152, 531.4, -138, 563.30005, -138, 565.69995, -129, 576.6, -129, 578.80005, -111, 596.80005, -111, 598.1, -95, 608.9, -95, 610.30005, -65, 623.19995, -65, 624.5, -43, 630.4, -43, 631.69995, -12, 637.6, -12, 638.9, 2.7999878, 640, 239.20001, 640, 249, 638.80005, 249, 638.19995, 254.90002, 639, 297.09998, 639, 327, 634.69995, 327, 634, 398, 637, 421.30005, 637, 446.30005, 629, 449.90002, 629, 468.90002, 608, 471, 608, 471, 581.6, 467, 572.6, 467, 568.4, 459, 555.4, 459, 552.30005, 440, 527.30005, 440, 525.1, 402.80005, 490, 399.5, 479.30005, 403, 468.30005, 403, 466.59998, 424.09998, 434, 425.5, 434, 429, 422.30005, 429, 414.59998, 425, 404.5, 425, 402.09998, 409, 388.09998, 409, 386.80005, 395, 379.7, 395, 378.59998, 296.3, 345, 293.40002, 345, 266.40002, 333, 263.59998, 333, 244.59998, 321, 242.90002, 321, 228.79999, 308, 226, 298, 226, 293.2, 232, 274.3, 232, 271.59998, 247, 247.59998, 247, 245.59998, 265, 223, 267, 223, 267, 207.90002, 264, 205.90002)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="string" unique_id=1011193450]
+position = Vector2(18.000002, 79.99999)
+rotation = 0.05740482
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -420.7, 319.90002, -423, 316.3, -423, 314)
+
+[connection signal="mouse_entered" from="box" to="." method="_on_box_mouse_entered"]
+[connection signal="mouse_exited" from="box" to="." method="_on_box_mouse_exited"]

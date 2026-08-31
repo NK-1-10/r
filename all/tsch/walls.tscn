@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dyxoxntpeujqn"]
+
+[ext_resource type="Script" uid="uid://dxgen5glx2q63" path="res://all/gd/walls.gd" id="1_t5tqx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xji68"]
+size = Vector2(2560, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5tqx"]
+size = Vector2(20, 180)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xji68"]
+radius = 1502.0
+height = 4620.0
+
+[node name="walls" type="Node2D" unique_id=1207429995]
+script = ExtResource("1_t5tqx")
+
+[node name="ground" type="StaticBody2D" parent="." unique_id=465587227]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=435181407]
+position = Vector2(1280, 1332)
+shape = SubResource("RectangleShape2D_xji68")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ground" unique_id=1954173868]
+position = Vector2(0, 1263)
+shape = SubResource("RectangleShape2D_t5tqx")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ground" unique_id=297628500]
+position = Vector2(2560, 1263)
+shape = SubResource("RectangleShape2D_t5tqx")
+
+[node name="out" type="Area2D" parent="." unique_id=871547475]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="out" unique_id=634271846]
+position = Vector2(1259, 402)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_xji68")
+
+[node name="respawn" type="Marker2D" parent="." unique_id=876753991]
+position = Vector2(390, -233)
+
+[connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]
