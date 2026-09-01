@@ -189,6 +189,8 @@ autowrap_mode = 3
 
 [node name="box" type="RigidBody2D" parent="." unique_id=528570215]
 position = Vector2(1220, -616)
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("4_hpohc")
 
 [node name="box" type="AnimatedSprite2D" parent="box" unique_id=70451481]
