@@ -256,5 +256,11 @@ rotation = 0.05740482
 scale = Vector2(0.7, 0.7)
 polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -420.7, 319.90002, -423, 316.3, -423, 314)
 
+[node name="overlay" type="Sprite2D" parent="box" unique_id=2121221100]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_hpohc")
+
 [connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]
 [connection signal="body_shape_entered" from="out" to="." method="_on_out_body_shape_entered"]
+[connection signal="mouse_entered" from="box" to="." method="_on_box_mouse_entered"]
+[connection signal="mouse_exited" from="box" to="." method="_on_box_mouse_exited"]

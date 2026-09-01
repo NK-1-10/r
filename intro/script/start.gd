@@ -7,6 +7,7 @@ extends Node2D
 
 @export var stiffness = 600.0
 @export var damping = 25.0
+var color = Color('#e45238')
 
 
 var panelStart = Vector2(87.0, 1473.0)
@@ -14,7 +15,7 @@ var panelEnd = Vector2(87.0, 218.0)
 var boxStart = Vector2(1229, -742)
 var mouseLocation = Vector2()
 var offset = Vector2.ZERO
-
+var startBow = false ; 
 
 var intro = {
 	1 :{
@@ -51,8 +52,9 @@ func _process(delta: float) -> void:
 		var force = to_target * stiffness - box.linear_velocity * damping
 		force = force.limit_length(2000.0)  # tune this cap
 		box.apply_force(force, grab_point - box.global_position)
-	if waitForDrop:
-		pass
+	if startBow:
+		waitingForClick = false
+		Bow()
 	
 # intro --------------------------------------------------------------------------------------------------------
 
@@ -75,6 +77,14 @@ func _input(event: InputEvent) -> void:
 			await Global.Typewriter("Great!", $explain/Panel/header, false)
 			await Global.Typewriter("Take your mouse and grab the package!", $explain/Panel/tut, false)
 			click = click + 1
+		if click == 1 and Global.typing == false:
+			await Global.Typewriter("Hold up. Let me just..", $explain/Panel/tut, false)
+			click += 1
+			startBow = true
+		if click == 2 and Global.typing == false:
+			await Global.Typewriter("Hold up. Let me just..", $explain/Panel/tut, false)
+			click += 1
+			startBow = true
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed and waitingForClick:
 			holdBox = true
@@ -101,5 +111,31 @@ func phase2():
 	waitForDrop = true
 
 func _on_box_body_entered(body: Node) -> void:
-	if body == ground:
-		print("box touched ground!")
+	if body == ground and waitForDrop:
+		drops += 1
+	if drops == 15:
+		startBow = true
+
+func Bow():
+	startBow = false
+	await Global.Typewriter("...", $explain/Panel/header, false)
+	await Global.Typewriter("Have you tried just...clicking on it?", $explain/Panel/tut, true)
+	GoldBlink($box/overlay)
+	waitingForClick = true
+
+# overlay function ------------------------------------------------------------------------------------------------------
+var inBox = false
+var notClicked = true
+func GoldBlink(what):
+	while inBox and notClicked:
+		what.color = color
+		var tween2 = get_tree().create_tween()
+		tween2.tween_method(what,'opasity', 100, 1)
+		var tween = get_tree().create_tween()
+		tween.tween_method(what, "opasity", 0, 1)
+
+func _on_box_mouse_entered() -> void:
+	inBox = true
+
+func _on_box_mouse_exited() -> void:
+	inBox = false
