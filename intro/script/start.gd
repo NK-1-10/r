@@ -17,19 +17,19 @@ var boxStart = Vector2(1229, -742)
 var mouseLocation = Vector2()
 var offset = Vector2.ZERO
 var holdBox = false
+var inBoxArea = false
 
  # ready and process --------------------------------------------------------------------------------------
 func _ready() -> void:
-	Signals.text_done.connect(txt_done)
 	box.body_entered.connect(_on_box_body_entered)
-	hover_area.mouse_entered.connect(_on_box_mouse_entered)
-	hover_area.mouse_exited.connect(_on_box_mouse_exited)
 	box.input_pickable = false
 	box.freeze = true
 	await get_tree().process_frame
 	start()
 
 func _process(delta: float) -> void:
+	if Engine.get_process_frames() % 60 == 0:
+		print("box pos: ", box.global_position, " mouse: ", get_global_mouse_position())
 	if holdBox:
 		var grab_point = box.to_global(offset)
 		var to_target = get_global_mouse_position() - grab_point
@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 
 # ----------------------------------------------no player input
 func start():
+	print('start is start')
 	box.position = boxStart
 	Signals.change_text.emit("You've got mail!", true, false, true)
 	await Signals.text_done
@@ -49,12 +50,10 @@ func start():
 	await get_tree().process_frame
 	Signals.change_text.emit("Lets try this -> Hover over the box and try oving it around", false, true, false)
 	can_pick_up = true
+	print('can pick up is enabled true')
 	
 # texts  --------------------------------------------------------------------------------------------------------
 var can_pick_up = false
-func txt_done():
-	pass
-
 # box moving -----------------------------------------------------------------------------------------------------
 
 # throw out ------------------------------------------------------------------------------------------------------
@@ -75,6 +74,7 @@ var drops = 0
 var next = false
 func _on_box_body_entered(body: Node) -> void:
 	if body == ground and can_pick_up:
+		print('meet the ground...', drops)
 		drops += 1
 	if drops == 20:
 		var n = true
@@ -88,23 +88,10 @@ func _on_box_body_entered(body: Node) -> void:
 			await Signals.text_done
 			await get_tree().process_frame
 		fade_loop()
-		can_press = true
+		#can_press = true
 		
 
 # overlay function ------------------------------------------------------------------------------------------------------
-var inBox = false
-var blinking = false
-var notClicked = true
-var blink_ready = false
-var can_press = false
-
-func _on_box_mouse_entered() -> void:
-	print("mouse entered box")
-	inBox = true
-
-func _on_box_mouse_exited() -> void:
-	print("mouse exited box")
-	inBox = false
 
 var fading = false
 
@@ -127,3 +114,15 @@ func Bow():
 	await boxSprite.animation_finished
 	bow.process_mode = Node.PROCESS_MODE_ALWAYS
 	bow.visible = true
+
+
+func _on_hover_area_mouse_entered() -> void:
+	print('trying to enter area...')
+	if can_pick_up:
+		inBoxArea = true
+		print ('in box area')
+
+func _on_hover_area_mouse_exited() -> void:
+	print('trying to leaev area...')
+	inBoxArea = false
+	print ('not in box area')

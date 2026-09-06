@@ -125,8 +125,9 @@ b = Vector2(520, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_at33n"]
 size = Vector2(103, 488)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mdbx0"]
-radius = 515.4775
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdbx0"]
+radius = 277.95514
+height = 956.0
 
 [node name="start" type="Node2D" unique_id=1284387027]
 script = ExtResource("1_63r3i")
@@ -238,11 +239,12 @@ scale = Vector2(0.7, 0.7)
 polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -420.7, 319.90002, -423, 316.3, -423, 314)
 
 [node name="HoverArea" type="Area2D" parent="box" unique_id=1909942269]
-z_index = 6
+z_index = 10
 priority = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box/HoverArea" unique_id=1186633226]
-shape = SubResource("CircleShape2D_mdbx0")
+rotation = 1.5927182
+shape = SubResource("CapsuleShape2D_mdbx0")
 
 [connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]
 [connection signal="body_shape_entered" from="out" to="." method="_on_out_body_shape_entered"]
