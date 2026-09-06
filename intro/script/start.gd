@@ -7,6 +7,7 @@ extends Node2D
 @onready var bow = $box/bow
 @onready var string = $box/string
 @onready var hover_area = $box/HoverArea
+@onready var overlay = $box/box/Sprite2D
 
 @export var stiffness = 600.0
 @export var damping = 25.0
@@ -15,14 +16,10 @@ var color = Color('#e45238')
 var boxStart = Vector2(1229, -742)
 var mouseLocation = Vector2()
 var offset = Vector2.ZERO
+var holdBox = false
 
  # ready and process --------------------------------------------------------------------------------------
 func _ready() -> void:
-	print("HoverArea exists: ", hover_area != null)
-	print("HoverArea children: ", hover_area.get_children())
-	for child in hover_area.get_children():
-		if child is CollisionShape2D:
-			print("shape resource: ", child.shape, " disabled: ", child.disabled, " global pos: ", child.global_position)
 	Signals.text_done.connect(txt_done)
 	box.body_entered.connect(_on_box_body_entered)
 	hover_area.mouse_entered.connect(_on_box_mouse_entered)
@@ -39,8 +36,6 @@ func _process(delta: float) -> void:
 		var force = to_target * stiffness - box.linear_velocity * damping
 		force = force.limit_length(2000.0)
 		box.apply_force(force, grab_point - box.global_position)
-	if blink_ready:
-		print("mouse global: ", get_global_mouse_position(), " box global: ", box.global_position, " hover_area global: ", hover_area.global_position, " inBox: ", inBox, " paused: ", get_tree().paused)
 
 # ----------------------------------------------no player input
 func start():
@@ -61,20 +56,6 @@ func txt_done():
 	pass
 
 # box moving -----------------------------------------------------------------------------------------------------
-var holdBox = false
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		print("click detected. blink_ready=", blink_ready, " notClicked=", notClicked, " inBox=", inBox)
-		if blink_ready and notClicked and inBox:
-			notClicked = false
-			print("conditions met, calling Bow()")
-			Bow()
-		elif can_pick_up and not blink_ready:
-			holdBox = true
-			offset = box.to_local(get_global_mouse_position())
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-		holdBox = false
-		box.freeze = false
 
 # throw out ------------------------------------------------------------------------------------------------------
 var firstTime = true
@@ -95,44 +76,54 @@ var next = false
 func _on_box_body_entered(body: Node) -> void:
 	if body == ground and can_pick_up:
 		drops += 1
-	if drops == 5:
+	if drops == 20:
+		var n = true
 		next = true
-		Signals.change_text.emit("WAIT. I have an idea! Let me just...", true, true, false)
-		blink_ready = true
-		GoldBlink($box/overlay)
+		if n:
+			n = false
+			Signals.change_text.emit("WAIT. I have an idea! Let me just...", true, true, false)
+			await Signals.text_done
+			await get_tree().process_frame
+			Signals.change_text.emit("$env:enable_open = 'True' ", true, true, false)
+			await Signals.text_done
+			await get_tree().process_frame
+		fade_loop()
+		can_press = true
+		
 
 # overlay function ------------------------------------------------------------------------------------------------------
 var inBox = false
 var blinking = false
 var notClicked = true
 var blink_ready = false
-
-func GoldBlink(what):
-	while blink_ready and notClicked:
-		if inBox:
-			what.modulate = color                          # <- sets to red
-			var tween = get_tree().create_tween()
-			tween.tween_property(what, "modulate:a", 0.0, 1) # fade alpha out
-			tween.tween_property(what, "modulate:a", 1.0, 1) # fade alpha back in
-			await tween.finished
-			blinking = true
-		else:
-			await get_tree().process_frame
+var can_press = false
 
 func _on_box_mouse_entered() -> void:
+	print("mouse entered box")
 	inBox = true
-	GoldBlink($box/overlay)
-	print("mouse entered box, inBox=true")
-func _on_box_mouse_exited() -> void:
-	inBox = false
-	print("mouse exited box, inBox=false")
 
+func _on_box_mouse_exited() -> void:
+	print("mouse exited box")
+	inBox = false
+
+var fading = false
+
+func fade_loop():
+	overlay.modulate = color
+	fading = true
+	while fading:
+		var tween = create_tween()
+		tween.tween_property(overlay, "modulate:a", 1.0, 1.0)
+		await tween.finished
+		if not fading:
+			overlay.modulate = Color(color.r, color.g, color.b, 0.0)
+			break
+		var tween2 = create_tween()
+		tween2.tween_property(overlay, "modulate:a", 0.0, 1.0)
+		await tween2.finished
 
 func Bow():
-	print("Bow() started")
 	boxSprite.play(&'bow')
 	await boxSprite.animation_finished
-	print("bow animation finished")
 	bow.process_mode = Node.PROCESS_MODE_ALWAYS
 	bow.visible = true
-	print("bow visible set to true")

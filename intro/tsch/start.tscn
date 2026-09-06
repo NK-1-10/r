@@ -137,6 +137,7 @@ offset_bottom = 1343.0
 color = Color(0.13725491, 0.14509805, 0.14117648, 1)
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=1585173077]
+position = Vector2(-4, -238)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=861328245]
 position = Vector2(1280, 1332)
@@ -174,6 +175,9 @@ script = ExtResource("4_hpohc")
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_qh6qy")
 animation = &"bow"
+
+[node name="Sprite2D" type="Sprite2D" parent="box/box" unique_id=1441074340]
+texture = ExtResource("5_hpohc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box" unique_id=1043349939]
 position = Vector2(-35, 12)
@@ -234,15 +238,14 @@ scale = Vector2(0.7, 0.7)
 polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -420.7, 319.90002, -423, 316.3, -423, 314)
 
 [node name="HoverArea" type="Area2D" parent="box" unique_id=1909942269]
-z_index = 4
+z_index = 6
+priority = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box/HoverArea" unique_id=1186633226]
 shape = SubResource("CircleShape2D_mdbx0")
 
-[node name="overlay" type="Sprite2D" parent="box" unique_id=2121221100]
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("5_hpohc")
-
 [connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]
 [connection signal="body_shape_entered" from="out" to="." method="_on_out_body_shape_entered"]
 [connection signal="input_event" from="box" to="." method="_on_box_input_event"]
+[connection signal="mouse_entered" from="box/HoverArea" to="." method="_on_hover_area_mouse_entered"]
+[connection signal="mouse_exited" from="box/HoverArea" to="." method="_on_hover_area_mouse_exited"]
