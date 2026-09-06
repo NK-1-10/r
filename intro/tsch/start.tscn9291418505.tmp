@@ -116,17 +116,14 @@ a = Vector2(-200, -242)
 b = Vector2(-288, -170)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4cja"]
-size = Vector2(1307.5, 148)
+size = Vector2(1517.5, 108)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lg04a"]
 a = Vector2(312, 276)
 b = Vector2(520, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_at33n"]
-size = Vector2(103, 488)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mdbx0"]
-radius = 515.4775
+size = Vector2(20, 437)
 
 [node name="start" type="Node2D" unique_id=1284387027]
 script = ExtResource("1_63r3i")
@@ -165,7 +162,6 @@ position = Vector2(491, -731)
 [node name="box" type="RigidBody2D" parent="." unique_id=528570215]
 process_mode = 3
 position = Vector2(1220, -616)
-input_pickable = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("4_hpohc")
@@ -185,7 +181,7 @@ position = Vector2(-116, -68)
 shape = SubResource("SegmentShape2D_cy3pl")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="box" unique_id=1996245555]
-position = Vector2(8.125, -274)
+position = Vector2(60.625, -284)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_t4cja")
 
@@ -195,7 +191,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("SegmentShape2D_lg04a")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="box" unique_id=1870177839]
-position = Vector2(388.5, -62)
+position = Vector2(430, -36.5)
 shape = SubResource("RectangleShape2D_at33n")
 
 [node name="bow" type="RigidBody2D" parent="box" unique_id=108080724]
@@ -233,12 +229,6 @@ rotation = 0.05740482
 scale = Vector2(0.7, 0.7)
 polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -420.7, 319.90002, -423, 316.3, -423, 314)
 
-[node name="HoverArea" type="Area2D" parent="box" unique_id=1909942269]
-z_index = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="box/HoverArea" unique_id=1186633226]
-shape = SubResource("CircleShape2D_mdbx0")
-
 [node name="overlay" type="Sprite2D" parent="box" unique_id=2121221100]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_hpohc")
@@ -246,3 +236,5 @@ texture = ExtResource("5_hpohc")
 [connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]
 [connection signal="body_shape_entered" from="out" to="." method="_on_out_body_shape_entered"]
 [connection signal="input_event" from="box" to="." method="_on_box_input_event"]
+[connection signal="mouse_entered" from="box" to="." method="_on_box_mouse_entered"]
+[connection signal="mouse_exited" from="box" to="." method="_on_box_mouse_exited"]

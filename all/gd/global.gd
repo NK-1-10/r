@@ -10,18 +10,20 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func Typewriter(Text , Place, Paused):
+	if Text == "":
+		Place.set_text("") 
+		return
 	if Paused:
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(0.5).timeout
 	for n in Text.length():
-		typing = true
 		var now = Text[n]
 		if Text[n] == "." or Text[n] == "?" or Text[n] == "!": time = typestop
 		else:  time = typetime
 		result += now
-		Place.set_text(result)
+		Place.set_text(result)  
 		await get_tree().create_timer(time).timeout
 	result = ""
-	typing = false
+	Place.set_text(result) 
 
 func _process(delta: float) -> void:
 	if typing: get_tree().paused = true 

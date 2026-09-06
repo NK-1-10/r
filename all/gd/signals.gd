@@ -1,6 +1,4 @@
 extends Node
 
-signal change_text(which, first)
-signal Intro_finnished()
-signal text_toggle(where)
-signal undo(what)
+signal change_text(which, first, end, header)
+signal text_done()
