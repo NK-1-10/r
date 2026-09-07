@@ -5,29 +5,27 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xji68"]
 size = Vector2(2560, 42)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5tqx"]
-size = Vector2(20, 180)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xji68"]
 radius = 1502.0
 height = 4620.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubmfa"]
+size = Vector2(2593, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5tqx"]
+size = Vector2(20, 180)
 
 [node name="walls" type="Node2D" unique_id=1207429995]
 script = ExtResource("1_t5tqx")
 
 [node name="ground" type="StaticBody2D" parent="." unique_id=465587227]
+position = Vector2(5, -226)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground" unique_id=435181407]
-position = Vector2(1280, 1332)
+position = Vector2(1280, 1282)
 shape = SubResource("RectangleShape2D_xji68")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ground" unique_id=1954173868]
-position = Vector2(0, 1263)
-shape = SubResource("RectangleShape2D_t5tqx")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="ground" unique_id=297628500]
-position = Vector2(2560, 1263)
-shape = SubResource("RectangleShape2D_t5tqx")
 
 [node name="out" type="Area2D" parent="." unique_id=871547475]
 
@@ -38,5 +36,23 @@ shape = SubResource("CapsuleShape2D_xji68")
 
 [node name="respawn" type="Marker2D" parent="." unique_id=876753991]
 position = Vector2(390, -233)
+
+[node name="once" type="StaticBody2D" parent="." unique_id=340448816]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="once" unique_id=1498182]
+position = Vector2(1284, 1293)
+shape = SubResource("RectangleShape2D_ubmfa")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="once" unique_id=1954173868]
+position = Vector2(5, 987)
+rotation = 3.1415927
+scale = Vector2(1.5233401, -3.5585618)
+shape = SubResource("RectangleShape2D_t5tqx")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="once" unique_id=297628500]
+position = Vector2(2565, 987)
+rotation = 3.1415927
+scale = Vector2(1.5233401, -3.5585618)
+shape = SubResource("RectangleShape2D_t5tqx")
 
 [connection signal="body_exited" from="out" to="." method="_on_out_body_exited"]

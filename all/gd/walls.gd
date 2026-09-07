@@ -1,15 +1,10 @@
 extends Node2D
 @onready var mark = $respawn
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_out_body_exited(body: Node2D) -> void:
-	body.position = mark.position
+	body.call_deferred("set_global_position", mark.global_position)

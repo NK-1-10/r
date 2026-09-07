@@ -9,6 +9,7 @@ script = ExtResource("1_u3fte")
 offset_top = 1384.0
 offset_right = 2562.0
 offset_bottom = 1631.0
+mouse_filter = 2
 
 [node name="Heading" type="Label" parent="Panel" unique_id=1265664732]
 layout_mode = 0

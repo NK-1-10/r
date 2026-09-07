@@ -10,6 +10,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func Typewriter(Text , Place, Paused):
+	await get_tree().create_timer(0.5).timeout
 	if Text == "":
 		Place.set_text("") 
 		return
@@ -22,6 +23,7 @@ func Typewriter(Text , Place, Paused):
 		result += now
 		Place.set_text(result)  
 		await get_tree().create_timer(time).timeout
+	await get_tree().create_timer(1).timeout
 	result = ""
 	Place.set_text(result) 
 

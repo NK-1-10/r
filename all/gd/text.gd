@@ -18,6 +18,7 @@ func _ready() -> void:
 func on_change_text(which, first, end, header):
 	Global.typing = true
 	if first:
+		await get_tree().create_timer(0.5).timeout
 		var tween = get_tree().create_tween()
 		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		tween.tween_property(panel, "position", up, 0.5)
@@ -27,6 +28,7 @@ func on_change_text(which, first, end, header):
 	else: 
 		await Global.Typewriter(which, txt, true)
 	if end:
+		await get_tree().create_timer(0.5).timeout
 		await get_tree().create_timer(0.5).timeout
 		var tween = get_tree().create_tween()
 		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
