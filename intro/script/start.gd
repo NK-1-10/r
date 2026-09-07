@@ -3,6 +3,7 @@ extends Node2D
 @onready var box = $box
 @onready var ground = $walls/ground
 @onready var below = $walls/once
+@onready var panel = $CanvasLayer/Panel
 
 var hits = 0
 var can_move = false
@@ -11,10 +12,18 @@ var can_press = false
 var grabOffset = Vector2.ZERO
 var mouseP = Vector2()
 
+var panPS = Vector2(-396, 131)
+var panPB = Vector2(216, 131)
+
+var height 
+var peak_y = 0.0
+var was_falling = false
+
 var FOLLOW_STRENGTH = 50.0
 var DAMPING = 10.0
 
 func _ready() -> void:
+	panel.position = panPS
 	Signals.change_text.emit("You've got mail !", true, false, true) #(what_text, first, end, header)
 	await Signals.text_done
 	Signals.change_text.emit("Seems you have gotten a message in the mail. this should be interesting...", false, true, false) #(what_text, first, end, header)
@@ -29,13 +38,20 @@ func _physics_process(_delta: float) -> void:
 		var force = to_mouse * FOLLOW_STRENGTH - box.linear_velocity * DAMPING
 		force = force.limit_length(2000.0)
 		box.apply_force(force, grabPoint - box.global_position)
+		
+	var is_falling = box.linear_velocity.y > 0
+	if is_falling and not was_falling:
+		peak_y = box.global_position.y
+	was_falling = is_falling
 
 func _on_box_body_entered(body: Node) -> void:
 	if body == ground or body == below:
-		hits += 1
+		hits_change(hits)
 		if hits == 1:
 			Signals.change_text.emit("Try getting it open with your mouse.", true, true, false) #(what_text, first, end, header)
 			await Signals.text_done
+		if hits ==25:
+			pass
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -51,3 +67,18 @@ func _on_box_move_mouse_entered() -> void:
 
 func _on_box_move_mouse_exited() -> void:
 	can_press = false
+	
+func hits_change(num):
+	var fall_height = ground.global_position.y - peak_y
+	print(fall_height)
+	if fall_height > -700:
+		hits += 1
+		if num != 1 && num <= 25:
+			var text = str(num)
+			$CanvasLayer/Panel/numbs.text = text
+			var tween = create_tween()
+			tween.tween_property(panel, "position", panPB,0.5)
+			await get_tree().create_timer(1).timeout
+			var tween2 = create_tween()
+			tween2.tween_property(panel, "position", panPS, 0.5)
+		hits += 1

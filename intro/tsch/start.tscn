@@ -167,6 +167,23 @@ polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -42
 position = Vector2(19.5, -23.5)
 shape = SubResource("RectangleShape2D_mdbx0")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=759753552]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=469065072]
+offset_left = 216.0
+offset_top = 131.0
+offset_right = 404.0
+offset_bottom = 322.0
+
+[node name="numbs" type="Label" parent="CanvasLayer/Panel" unique_id=140228254]
+layout_mode = 0
+offset_right = 187.0
+offset_bottom = 186.0
+theme_override_font_sizes/font_size = 100
+text = "30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="box" to="." method="_on_box_body_entered"]
 [connection signal="input_event" from="box" to="." method="_on_box_input_event"]
 [connection signal="mouse_entered" from="box/boxMove" to="." method="_on_box_move_mouse_entered"]
