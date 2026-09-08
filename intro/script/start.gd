@@ -35,7 +35,7 @@ func _ready() -> void:
 	Signals.box_drop.emit()
 
 func _physics_process(_delta: float) -> void:
-	if can_move:
+	if can_move and not blink:
 		mouseP = get_global_mouse_position()
 		var grabPoint = box.to_global(grabOffset)
 		var to_mouse = mouseP - grabPoint
@@ -65,6 +65,8 @@ func _input(event: InputEvent) -> void:
 				can_move = true
 		else:
 			can_move = false
+	if event is InputEventMouseButton and blink:
+		stop_blink($box/boxFlash)
 
 func _on_box_move_mouse_entered() -> void:
 	can_press = true
@@ -87,6 +89,7 @@ func hits_change(num):
 			tween2.tween_property(panel, "position", panPS, 0.5)
 		hits += 1
 		if num == cip:
+			await get_tree().create_timer(1).timeout
 			Signals.change_text.emit("Hmm... Doesnt seem to work...", true, false, false) #(what_text, first, end, header)
 			await Signals.text_done
 			Signals.change_text.emit("Oh, wait, I have an idea! ", false, true, false) #(what_text, first, end, header)
@@ -94,14 +97,19 @@ func hits_change(num):
 			start_blink($box/boxFlash)
 
 var blink_tween: Tween
+var blink = false
 func start_blink(asset):
+	blink = true
 	asset.modulate = co
 	blink_tween = create_tween()
 	blink_tween.set_loops()
 	blink_tween.tween_property(asset, "modulate:a", 0, 0.5)
 	blink_tween.tween_property(asset, "modulate:a", 1, 0.5)
 
+
+
 func stop_blink(asset):
 	if blink_tween:
 		blink_tween.kill()
+		blink = false
 	asset.modulate.a = 1
