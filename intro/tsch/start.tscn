@@ -104,6 +104,7 @@ size = Vector2(843, 575)
 
 [node name="start" type="Node2D" unique_id=1284387027]
 script = ExtResource("1_63r3i")
+cip = 5
 
 [node name="walls" parent="." unique_id=1207429995 instance=ExtResource("2_hpohc")]
 
@@ -166,6 +167,10 @@ polygon = PackedVector2Array(-431, 314, -431, 325, -423.5, 322, -421.8, 322, -42
 [node name="CollisionShape2D" type="CollisionShape2D" parent="box/boxMove" unique_id=162185841]
 position = Vector2(19.5, -23.5)
 shape = SubResource("RectangleShape2D_mdbx0")
+
+[node name="boxFlash" type="Sprite2D" parent="box" unique_id=1652000344]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_hpohc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=759753552]
 

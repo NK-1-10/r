@@ -5,6 +5,10 @@ extends Node2D
 @onready var below = $walls/once
 @onready var panel = $CanvasLayer/Panel
 
+@export var cip = 25
+
+var co = Color(0.745, 0.231, 0.161, 1.0)
+
 var hits = 0
 var can_move = false
 var can_press = false
@@ -71,9 +75,9 @@ func _on_box_move_mouse_exited() -> void:
 func hits_change(num):
 	var fall_height = ground.global_position.y - peak_y
 	print(fall_height)
-	if fall_height > -700:
+	if fall_height > -800:
 		hits += 1
-		if num != 1 && num <= 25:
+		if num != 1 && num <= cip:
 			var text = str(num)
 			$CanvasLayer/Panel/numbs.text = text
 			var tween = create_tween()
@@ -82,3 +86,22 @@ func hits_change(num):
 			var tween2 = create_tween()
 			tween2.tween_property(panel, "position", panPS, 0.5)
 		hits += 1
+		if num == cip:
+			Signals.change_text.emit("Hmm... Doesnt seem to work...", true, false, false) #(what_text, first, end, header)
+			await Signals.text_done
+			Signals.change_text.emit("Oh, wait, I have an idea! ", false, true, false) #(what_text, first, end, header)
+			await Signals.text_done
+			start_blink($box/boxFlash)
+
+var blink_tween: Tween
+func start_blink(asset):
+	asset.modulate = co
+	blink_tween = create_tween()
+	blink_tween.set_loops()
+	blink_tween.tween_property(asset, "modulate:a", 0, 0.5)
+	blink_tween.tween_property(asset, "modulate:a", 1, 0.5)
+
+func stop_blink(asset):
+	if blink_tween:
+		blink_tween.kill()
+	asset.modulate.a = 1
