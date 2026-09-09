@@ -59,6 +59,7 @@ func _on_box_body_entered(body: Node) -> void:
 		if hits ==25:
 			pass
 
+var c = 0
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
@@ -68,9 +69,13 @@ func _input(event: InputEvent) -> void:
 		else:
 			can_move = false
 	if event is InputEventMouseButton and blink:
-		stop_blink($box/boxFlash)
-		bow()
-
+		c += 1
+		if c == 1:
+			stop_blink($box/boxFlash)
+			bow()
+		elif c ==2:
+			stop_blink($box/nobow)
+			string()
 func _on_box_move_mouse_entered() -> void:
 	can_press = true
 
@@ -104,6 +109,7 @@ var click = false
 
 func start_blink(asset):
 	blink = true
+	asset.visible = true
 	asset.modulate = co
 	blink_tween = create_tween()
 	blink_tween.set_loops()
@@ -118,11 +124,26 @@ func stop_blink(asset):
 		blink_tween.kill()
 		blink = false
 	asset.modulate.a = 0
+	asset.visible = false
 	
 func bow():
+	var bow = $bow
 	$box/box.play(&"bow")
 	await $box/box.animation_finished
-	$bow.position.x = box.position.x - 66
-	$bow.position.y = box.position.y - 226
-	$bow.process_mode = Node.PROCESS_MODE_INHERIT
-	$bow.visible = true
+	bow.position.x = box.position.x - 66
+	bow.position.y = box.position.y - 226
+	bow.process_mode = Node.PROCESS_MODE_INHERIT
+	bow.visible = true
+	start_blink($box/nobow)
+
+func string():
+	var st = $string
+	$box/box.animation = &"box"
+	$box/box.play(&"box")
+	await $box/box.animation_finished
+	st.position.x = box.position.x
+	st.position.y = box.position.y - 94
+	st.process_mode = Node.PROCESS_MODE_INHERIT
+	st.visible = true
+	click = false
+	blink = false
