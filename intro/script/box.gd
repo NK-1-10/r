@@ -1,7 +1,7 @@
 extends Node2D
 @onready var BOX = $"."
 @onready var box = $box
-@onready var bow = $bow
+@onready var bow = $"../bow"
 @onready var string = $string
 
 var boxStart = Vector2(1220.0, -616.0)

@@ -48,12 +48,14 @@ func _physics_process(_delta: float) -> void:
 		peak_y = box.global_position.y
 	was_falling = is_falling
 
+var once = true
 func _on_box_body_entered(body: Node) -> void:
 	if body == ground or body == below:
 		hits_change(hits)
-		if hits == 1:
+		if hits == 1 and once:
 			Signals.change_text.emit("Try getting it open with your mouse.", true, true, false) #(what_text, first, end, header)
 			await Signals.text_done
+			once = false
 		if hits ==25:
 			pass
 
@@ -67,6 +69,7 @@ func _input(event: InputEvent) -> void:
 			can_move = false
 	if event is InputEventMouseButton and blink:
 		stop_blink($box/boxFlash)
+		bow()
 
 func _on_box_move_mouse_entered() -> void:
 	can_press = true
@@ -87,7 +90,6 @@ func hits_change(num):
 			await get_tree().create_timer(1).timeout
 			var tween2 = create_tween()
 			tween2.tween_property(panel, "position", panPS, 0.5)
-		hits += 1
 		if num == cip:
 			await get_tree().create_timer(1).timeout
 			Signals.change_text.emit("Hmm... Doesnt seem to work...", true, false, false) #(what_text, first, end, header)
@@ -98,6 +100,8 @@ func hits_change(num):
 
 var blink_tween: Tween
 var blink = false
+var click = false
+
 func start_blink(asset):
 	blink = true
 	asset.modulate = co
@@ -105,11 +109,20 @@ func start_blink(asset):
 	blink_tween.set_loops()
 	blink_tween.tween_property(asset, "modulate:a", 0, 0.5)
 	blink_tween.tween_property(asset, "modulate:a", 1, 0.5)
-
-
+	await get_tree().create_timer(1).timeout
+	click = true
+	
 
 func stop_blink(asset):
 	if blink_tween:
 		blink_tween.kill()
 		blink = false
-	asset.modulate.a = 1
+	asset.modulate.a = 0
+	
+func bow():
+	$box/box.play(&"bow")
+	await $box/box.animation_finished
+	$bow.position.x = box.position.x - 66
+	$bow.position.y = box.position.y - 226
+	$bow.process_mode = Node.PROCESS_MODE_INHERIT
+	$bow.visible = true
