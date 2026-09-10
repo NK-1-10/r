@@ -4,6 +4,7 @@ extends Node2D
 @onready var ground = $walls/ground
 @onready var below = $walls/once
 @onready var panel = $CanvasLayer/Panel
+@onready var trash = $trash
 
 @export var cip = 25
 
@@ -147,3 +148,22 @@ func string():
 	st.visible = true
 	click = false
 	blink = false
+
+var bow_hold = false
+func _on_bow_up_mouse_entered() -> void:
+	bow_hold = true
+
+func _on_bow_up_mouse_exited() -> void:
+	bow_hold = false
+	
+
+
+var string_hold = false
+func _on_string_up_mouse_entered() -> void:
+	string_hold = true
+	Signals.trash.emit(true)
+
+
+func _on_string_up_mouse_exited() -> void:
+	string_hold = false
+	Signals.trash.emit(false)

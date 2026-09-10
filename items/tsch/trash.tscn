@@ -96,7 +96,7 @@ script = ExtResource("11_dhvsw")
 [node name="get" type="Area2D" parent="." unique_id=2074036538]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="get" unique_id=608482248]
-position = Vector2(-7, 159)
+position = Vector2(-274, -58)
 shape = SubResource("CircleShape2D_w3kd1")
 
 [connection signal="body_entered" from="get" to="." method="_on_get_body_entered"]

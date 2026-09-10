@@ -2,9 +2,14 @@ extends AnimatedSprite2D
 var isIn = false
 @onready var trash = $"."
 
+var trashS = Vector2(3487, 250)
+var trashE = Vector2(2422, 250)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	trash.position = trashS
 	trash.animation = &"normal"
+	Signals.trash.connect(on_trash)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,3 +29,11 @@ func _on_get_body_entered(body: Node2D) -> void:
 
 func _on_get_body_exited(body: Node2D) -> void:
 	isIn = false
+	
+func on_trash(what):
+	if what:
+		var tween = create_tween()
+		tween.tween_properties(what, "position", trashE, 0.7)
+	else:
+		var tween = create_tween()
+		tween.tween_properties(what, "position", trashS, 0.7)
