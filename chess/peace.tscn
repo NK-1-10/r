@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cr7roh527hpmo"]
+
+[ext_resource type="Script" uid="uid://bqvtjcide2nn7" path="res://chess/peace.gd" id="1_pr1fn"]
+[ext_resource type="Texture2D" uid="uid://3tpletj4hpi0" path="res://asstes/chess/blackhorse.PNG" id="2_pr1fn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr1fn"]
+size = Vector2(97, 99)
+
+[node name="peace" type="Node2D" unique_id=630233041]
+script = ExtResource("1_pr1fn")
+
+[node name="peace" type="Sprite2D" parent="." unique_id=330461141]
+position = Vector2(-1, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_pr1fn")
+
+[node name="square" type="Area2D" parent="." unique_id=1884799699]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="square" unique_id=1159762342]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_pr1fn")

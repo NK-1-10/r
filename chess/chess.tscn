@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://gsaccyyl6omj"]
+
+[ext_resource type="Script" uid="uid://du2wm6kq1xojw" path="res://chess/chess.gd" id="1_l1y4x"]
+[ext_resource type="Texture2D" uid="uid://cmsmire7avnrl" path="res://asstes/chess/board.PNG" id="1_lv75f"]
+[ext_resource type="PackedScene" uid="uid://cr7roh527hpmo" path="res://chess/peace.tscn" id="3_l1odr"]
+[ext_resource type="PackedScene" uid="uid://dyxoxntpeujqn" path="res://all/tsch/walls.tscn" id="4_awjd8"]
+
+[node name="chess" type="Node2D" unique_id=1140527643]
+script = ExtResource("1_l1y4x")
+x_step = 110.0
+y_step = -110.0
+
+[node name="walls" parent="." unique_id=1207429995 instance=ExtResource("4_awjd8")]
+
+[node name="board" type="Sprite2D" parent="." unique_id=469359634]
+position = Vector2(1872, 648)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_lv75f")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1909364686]
+position = Vector2(1488, 1025)
+
+[node name="peace" parent="." unique_id=630233041 instance=ExtResource("3_l1odr")]
+position = Vector2(-499, -183)

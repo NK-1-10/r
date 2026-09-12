@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 Global="*uid://j38r0fqmykem"
 Signals="*uid://b5stwrnbvhx3n"
+GlobalChess="*uid://rufxn6jetney"
 
 [display]
 
