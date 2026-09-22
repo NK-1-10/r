@@ -3,6 +3,8 @@ extends Node
 var player = "w" # "w" or "b"
 var turn = "w"
 
+var cPiece
+
 var white_templates = {
 	"pawn": {"name": "pawn", "image": "res://asstes/chess/whitepawn.PNG", "points": 1},
 	"rook": {"name": "rook", "image": "res://asstes/chess/whiterook.PNG", "points": 5},
@@ -28,12 +30,14 @@ const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"]
 func setup_board(player_color: String) -> void:
 	live_board.clear()
 	
+	var opponent_color = "black" if player_color == "w" else "white"
+	var player_full = "white" if player_color == "w" else "black"
+	
 	for i in range(8):
 		var f = FILES[i]
 
-		live_board[f + "1"] = {"type": BACK_RANK[i], "color": "black", "node": null}
-		live_board[f + "2"] = {"type": "pawn", "color": "black", "node": null}
+		live_board[f + "1"] = {"type": BACK_RANK[i], "color": player_full, "node": null}
+		live_board[f + "2"] = {"type": "pawn", "color": player_full, "node": null}
 		
-		live_board[f + "7"] = {"type": "pawn", "color": "white", "node": null}
-		live_board[f + "8"] = {"type": BACK_RANK[i], "color": "white", "node": null}
-		
+		live_board[f + "7"] = {"type": "pawn", "color": opponent_color, "node": null}
+		live_board[f + "8"] = {"type": BACK_RANK[i], "color": opponent_color, "node": null}

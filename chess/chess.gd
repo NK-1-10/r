@@ -1,7 +1,8 @@
 extends Node2D
 
-@export var x_step: float = 71.0
-@export var y_step: float = -70.0
+@export var x_step: float = 63
+@export var y_step: float = -62.5
+
 
 @onready var marker_template: Marker2D = $Marker2D
 @onready var peace_template = $peace
@@ -9,8 +10,8 @@ extends Node2D
 var horizontal = ["a", "b", "c", "d", "e", "f", "g", "h"]
 var vertical = [1, 2, 3, 4, 5, 6, 7, 8]
 
-var x_starting: float = 1488.0
-var y_starting: float = 1025.0
+var x_starting: float = 574.0   # (1152 - 568) / 2
+var y_starting: float = 552  # bottom of board, leaves ~44px margin top and bottom
 
 var board_positions = {}
 
@@ -33,15 +34,11 @@ func generate_board() -> void:
 			new_marker.visible = true
 			add_child(new_marker)
 			
-			# Inside generate_board(), right before spawning:
-			if tile_coord.ends_with("2"):
-				print("Rank 2 Tile: ", tile_coord, " -> Data: ", GlobalChess.live_board.get(tile_coord))
-						
+			
 			board_positions[tile_coord] = world_position
 			
 			if GlobalChess.live_board.has(tile_coord):
 				var piece_info = GlobalChess.live_board[tile_coord]
-				print("Spawning: ", piece_info["color"], " ", piece_info["type"], " at ", tile_coord, " Position: ", world_position)
 				spawn_piece_sprite(tile_coord, piece_info)
 	
 

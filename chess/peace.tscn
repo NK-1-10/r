@@ -15,7 +15,10 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_pr1fn")
 
 [node name="square" type="Area2D" parent="." unique_id=1884799699]
+z_index = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="square" unique_id=1159762342]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_pr1fn")
+
+[connection signal="input_event" from="square" to="." method="_on_square_input_event"]

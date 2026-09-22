@@ -6,3 +6,5 @@ signal box_drop()
 signal trash(what)
 # chess ---------------------------------------------------------
 signal peace(which, square)
+signal move(what)
+signal highlights()
