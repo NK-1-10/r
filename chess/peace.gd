@@ -22,7 +22,10 @@ func setup_piece(type: String, color: String, square: String, texture_path: Stri
 
 func _on_square_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		print("PIECE CLICKED: ", name)
 		var my_short_color = "w" if piece_color == "white" else "b"
 		if my_short_color != GlobalChess.turn:
+			print("turn mismatch: ", my_short_color, " vs ", GlobalChess.turn)
 			return
+		print("about to emit on Signals instance: ", Signals)
 		Signals.move.emit(self)

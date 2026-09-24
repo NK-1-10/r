@@ -11,6 +11,7 @@ var maxRight = maxLeft + 63*8
 var horizontal = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
 func _ready() -> void:
+	print("MOVEMENT SCRIPT READY")
 	Signals.move.connect(_move)
 	Signals.highlights.connect(clear_highlights)
 
