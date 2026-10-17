@@ -9,8 +9,7 @@ var current_square: String = ""
 func _ready() -> void:
 	# temporary debug
 	var area = $peace/square if has_node("peace/square") else $square
-	area.mouse_entered.connect(func(): print("mouse entered: ", name))
-	area.mouse_exited.connect(func(): print("mouse exited: ", name))
+
 
 func setup_piece(type: String, color: String, square: String, texture_path: String) -> void:
 	piece_type = type

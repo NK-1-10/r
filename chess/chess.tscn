@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dyxoxntpeujqn" path="res://all/tsch/walls.tscn" id="4_awjd8"]
 [ext_resource type="Script" uid="uid://6outbx7edypr" path="res://chess/movement.gd" id="5_awjd8"]
 [ext_resource type="Script" uid="uid://dlwjceho3bo3s" path="res://chess/green.gd" id="6_6ithn"]
+[ext_resource type="Script" uid="uid://bcg1cblx8jvb6" path="res://chess/bob_ai.gd" id="7_hp2ci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awjd8"]
 radius = 28.0
@@ -39,6 +40,7 @@ offset_left = -72.0
 offset_top = 288.0
 offset_right = -16.0
 offset_bottom = 345.0
+mouse_filter = 2
 color = Color(0.57544017, 0.8738007, 0.31738785, 0.5882353)
 script = ExtResource("6_6ithn")
 
@@ -53,7 +55,9 @@ offset_left = -72.0
 offset_top = 288.0
 offset_right = -16.0
 offset_bottom = 345.0
+mouse_filter = 2
 color = Color(0.94603056, 0.52494156, 0.4879303, 0.5882353)
+script = ExtResource("6_6ithn")
 
 [node name="Area2D" type="Area2D" parent="movement/red" unique_id=1391202267]
 
@@ -61,4 +65,8 @@ color = Color(0.94603056, 0.52494156, 0.4879303, 0.5882353)
 position = Vector2(28, 29)
 shape = SubResource("CircleShape2D_awjd8")
 
+[node name="BobAi" type="Node2D" parent="." unique_id=751661898]
+script = ExtResource("7_hp2ci")
+
 [connection signal="input_event" from="movement/green/Area2D" to="movement/green" method="_on_area_2d_input_event"]
+[connection signal="input_event" from="movement/red/Area2D" to="movement/red" method="_on_area_2d_input_event"]

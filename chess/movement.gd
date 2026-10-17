@@ -14,20 +14,24 @@ func _ready() -> void:
 	print("MOVEMENT SCRIPT READY")
 	Signals.move.connect(_move)
 	Signals.highlights.connect(clear_highlights)
+	Signals.changeMove.connect(change_move)
+	
+func change_move():
+	if GlobalChess.turn == "w":
+		GlobalChess.turn = "b"
+	elif GlobalChess.turn == "b":
+		GlobalChess.turn = "w"
 
-func _move(what: Node2D) -> void:
-	GlobalChess.cPiece = what
-	clear_highlights()
-	var type = what.piece_type
-	var my_color = what.piece_color
-
-	var col = what.current_square[0]
-	var row = int(what.current_square[1])
+func get_valid_moves(piece: Node2D) -> Array:
+	var type = piece.piece_type
+	var my_color = piece.piece_color
+	var col = piece.current_square[0]
+	var row = int(piece.current_square[1])
 	
 	var moves: Array = []
 	
 	if type == "pawn":
-		var is_player_piece = (what.piece_color == "white" and GlobalChess.player == "w") or (what.piece_color == "black" and GlobalChess.player == "b")
+		var is_player_piece = (piece.piece_color == "white" and GlobalChess.player == "w") or (piece.piece_color == "black" and GlobalChess.player == "b")
 		var direction = 1 if is_player_piece else -1
 		var start_row = 2 if is_player_piece else 7
 		
@@ -40,15 +44,13 @@ func _move(what: Node2D) -> void:
 				if GlobalChess.live_board.has(square):
 					break
 				moves.append(square)
-				_check(square, my_color)
 		else:
 			var target_row = row + direction
 			if target_row >= 1 and target_row <= 8:
 				var square = col + str(target_row)
 				if not GlobalChess.live_board.has(square):
 					moves.append(square)
-					_check(square, my_color)
-		
+	
 	elif type == "rook":
 		var where = horizontal.find(col)
 		var directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
@@ -82,6 +84,19 @@ func _move(what: Node2D) -> void:
 			[1, 1], [1, -1], [-1, 1], [-1, -1]
 		]
 		moves = get_stepping_moves(where, row, directions, my_color)
+	
+	return moves
+
+
+func _move(what: Node2D) -> void:
+	GlobalChess.cPiece = what
+	clear_highlights()
+	
+	var moves = get_valid_moves(what)
+	var my_color = what.piece_color
+	
+	for square in moves:
+		_check(square, my_color)
 
 
 func get_sliding_moves(where: int, row: int, directions: Array, my_color: String) -> Array:
